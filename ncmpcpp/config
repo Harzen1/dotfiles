@@ -13,8 +13,6 @@ audio_output {
     path                    "/tmp/mpd.fifo"
     format                  "44100:16:2"
 }
-execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
-
 # Visualizer
 visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "fifo"
