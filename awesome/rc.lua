@@ -245,7 +245,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey,   "Shift" }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -304,21 +304,22 @@ globalkeys = gears.table.join(
               {description="Next Media Track",group="awesome"}),
     awful.key({ },"XF86AudioPrev",function()awful.util.spawn("playerctl previous")end,
               {description="Previous Media Track",group="awesome"}),
-    
-    -- Standard program
+    -- Custom Shortcuts 
     awful.key({ modkey, "Mod1"    }, "p", function () awful.util.spawn("xrandr -o 1") end,
               {description = "Set screen to Portrait", group = "Screen"}),
     awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("xrandr -o 0") end,
               {description = "Set Screen to Landscape", group = "Screen"}),
     awful.key({ modkey,           }, "c", function () awful.util.spawn("gpick --pick &") end,
               {description = "Open Color Picker", group = "launcher"}),
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey,           }, "s", function () awful.util.spawn("flameshot gui") end,
+              {description = "Screenshot", group = "Custom"}),
+    -- Standard program
+  awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Control"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-
     awful.key({ modkey,           }, "=",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "-",     function () awful.tag.incmwfact(-0.05)          end,

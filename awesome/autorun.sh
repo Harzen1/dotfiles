@@ -25,3 +25,5 @@ run volumeicon &
 # Music 
 run mpd &
 run mpDris2 &
+# Flameshot (Screenshots)
+run flameshot &
