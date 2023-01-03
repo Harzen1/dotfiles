@@ -27,7 +27,7 @@ disabled = true
 [username]
 style_user = "bold blue"
 style_root = "bold red"
-disabled = false
+disabled = true
 show_always = true
 
 [sudo]

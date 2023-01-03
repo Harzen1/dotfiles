@@ -1,7 +1,6 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -47,7 +46,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 -- Gaps
-beautiful.useless_gap = 4
+beautiful.useless_gap = 5
 beautiful.gap_single_client = true
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -84,9 +83,8 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   {"Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", terminal .. " -e man awesome" },
-   --{ "Customize", functionq() awesome.util.spawn("lxappearance") end},
    { "Edit config", editor_cmd .. " " .. awesome.conffile },
    { "Restart", awesome.restart },
    { "Quit", function() awesome.quit() end },
@@ -154,39 +152,39 @@ local tasklist_buttons = gears.table.join(
 awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
-    awful.tag.add("", {
+    awful.tag.add("  ", {
         layout             = awful.layout.suit.tile.bottom,
         gap_single_client  = true,
     })
-    awful.tag.add("", {
+    awful.tag.add("  ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("﬏", {
+    awful.tag.add(" ﬏ ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("", {
+    awful.tag.add("  ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("5", {
+    awful.tag.add(" 5 ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("6", {
+    awful.tag.add(" 6 ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("7", {
+    awful.tag.add(" 7 ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("8", {
+    awful.tag.add(" 8 ", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("", {
+    awful.tag.add(" 9 ", {
         layout             = awful.layout.suit.tile.top,
         gap_single_client  = true,
         gap                = 25
@@ -207,9 +205,19 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons
     }
-
-    -- Create a tasklist widget
-   
+-- Systray widget
+--beautiful.systray_icon_spacing = 7
+--local systray = wibox.widget.systray()
+--             systray:set_base_size(23)
+---------------------------------------------
+separator = wibox.widget.textbox()
+separator.text = "  |  "
+spacer = wibox.widget.textbox()
+spacer.text = "  "
+  --
+local power_menu = require("widgets.power-menu")
+---------------------------------------------
+  -- Create a tasklist widget
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -219,17 +227,23 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher,
+            s.mylayoutbox,
+            separator,
             s.mytaglist,
             s.mypromptbox,
         },
         s.mytasklist,  -- Middle widget
         { -- Right widget 
             layout = wibox.layout.fixed.horizontal,
+            separator,
             mykeyboardlayout,
+            separator,
             wibox.widget.systray(),
+            separator,
             mytextclock,
-            s.mylayoutbox,
+            separator,
+            power_menu(),
         },
     }
 end)

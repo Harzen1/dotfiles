@@ -32,7 +32,7 @@ key_bindings:
 #    shape: block
 # Theme
 window:
-  opacity: 0.95
+  opacity: 0.92
   padding:
     x: 10
     y: 10

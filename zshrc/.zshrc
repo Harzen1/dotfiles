@@ -62,9 +62,10 @@ cd() {
 }
 
 # alias
+alias neofetch='neofetch --ascii_distro archlinux'
 alias q='exit'
-alias music='ncmpcpp'
 alias v="nvim"
+alias ls="lsd"
 alias l="lsd"
 alias ll="lsd -l"
 alias la="lsd -a"
@@ -75,6 +76,7 @@ alias pacs="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {
 alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
 alias yays="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro yay -S"
 alias nay="yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro yay -Rns"
+alias addx='chmod +x'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme

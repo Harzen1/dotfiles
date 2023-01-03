@@ -69,7 +69,7 @@ alternative_header_second_line_format = {$b{$2%a$9}{ - $7%b$9}{ ($2%y$9)}}|{%D}
 song_list_format = " $1%t $R$5%a  $6|  $4%l  "
 song_columns_list_format = "(3)[cyan]{n} (45)[green]{t|f} (45)[white]{a}  (7)[cyan]{l}"
 #song_columns_list_format = "(5)[black]{n} (25)[blue]{t|f} (25)[black]{ar}"
-song_library_format = {{%t - %a} (%b)}|{%f}
+song_library_format = {{%t - %b} (%b)}|{%f}
  
 # UI FORMAT
 now_playing_prefix = $b

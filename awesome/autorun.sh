@@ -16,14 +16,11 @@ run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 run picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom --animation-stiffness 350 &
 # Redshift
 run redshift -l -36.820133:-73.044388 -t 6500k:4000k &
-# Bluetooth Tray
-run blueberry-tray &
-# Network manager
-run nm-applet &
-# Volume Tray
-run volumeicon &
-# Music 
-run mpd &
+# Music (mpd & mpdris2)
+run mpd && 
 run mpDris2 &
-# Flameshot (Screenshots)
+# System tray apps
+run nm-applet && 
+run blueberry-tray &&
 run flameshot &
+run volumeicon && 
