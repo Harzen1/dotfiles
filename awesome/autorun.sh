@@ -20,7 +20,7 @@ run redshift -l -36.820133:-73.044388 -t 6500k:4000k &
 run mpd && 
 run mpDris2 &
 # System tray apps
-run nm-applet && 
-run blueberry-tray &&
-run flameshot &
-run volumeicon && 
+#run nm-applet && 
+#run blueberry-tray &&
+#run flameshot &
+#run volumeicon && 

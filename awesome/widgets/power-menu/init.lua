@@ -121,10 +121,10 @@ local function worker(user_args)
                     awful.button({}, 1, function()
                         if popup.visible then
                             popup.visible = not popup.visible
-                            logout_menu_widget:set_bg('#00000000')
+                            power_menu:set_bg('#00000000')
                         else
                             popup:move_next_to(mouse.current_widget_geometry)
-                            logout_menu_widget:set_bg(beautiful.bg_focus)
+                            power_menu:set_bg(beautiful.bg_focus)
                         end
                     end)
             )

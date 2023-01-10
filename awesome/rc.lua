@@ -52,7 +52,7 @@ beautiful.gap_single_client = true
 terminal = "alacritty"
 editor = os.getenv("code") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
-
+dmenu_ex = "dmenu_run -fn 'Ubuntu Light 11' -sb '#33175c' -sf '#aaaaaa' -p 'Run: '"
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -103,7 +103,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+--mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -152,39 +152,39 @@ local tasklist_buttons = gears.table.join(
 awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
-    awful.tag.add("  ", {
+    awful.tag.add("terminal", { --
         layout             = awful.layout.suit.tile.bottom,
         gap_single_client  = true,
     })
-    awful.tag.add("  ", {
+    awful.tag.add("web", { -- 
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add(" ﬏ ", {
+    awful.tag.add("vscode", { --﬏ 
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add("  ", {
+    awful.tag.add("files", { -- 
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add(" 5 ", {
+    awful.tag.add("etc", {
         layout             = awful.layout.suit.tile,
         gap_single_client  = true,
     })
-    awful.tag.add(" 6 ", {
-        layout             = awful.layout.suit.tile,
-        gap_single_client  = true,
-    })
-    awful.tag.add(" 7 ", {
-        layout             = awful.layout.suit.tile,
-        gap_single_client  = true,
-    })
-    awful.tag.add(" 8 ", {
-        layout             = awful.layout.suit.tile,
-        gap_single_client  = true,
-    })
-    awful.tag.add(" 9 ", {
+    --awful.tag.add("...", {
+    --    layout             = awful.layout.suit.tile,
+    --    gap_single_client  = true,
+    --})
+    --awful.tag.add(" 7 ", {
+    --    layout             = awful.layout.suit.tile,
+    --    gap_single_client  = true,
+    --})
+    --awful.tag.add(" 8 ", {
+    --    layout             = awful.layout.suit.tile,
+    --    gap_single_client  = true,
+    --})
+    awful.tag.add("music", {
         layout             = awful.layout.suit.tile.top,
         gap_single_client  = true,
         gap                = 25
@@ -213,9 +213,11 @@ awful.screen.connect_for_each_screen(function(s)
 separator = wibox.widget.textbox()
 separator.text = "  |  "
 spacer = wibox.widget.textbox()
-spacer.text = "  "
+spacer.text = "    "
   --
 local power_menu = require("widgets.power-menu")
+local volume_widget = require("awesome-wm-widgets.pactl-widget.volume")
+local mpris_widget = require("awesome-wm-widgets.mpris-widget")
 ---------------------------------------------
   -- Create a tasklist widget
 
@@ -226,24 +228,36 @@ local power_menu = require("widgets.power-menu")
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+            --spacer,
+            spacer,
             layout = wibox.layout.fixed.horizontal,
             --mylauncher,
             s.mylayoutbox,
             separator,
             s.mytaglist,
-            s.mypromptbox,
+            separator,
+            --s.mypromptbox,
         },
-        s.mytasklist,  -- Middle widget
+        --s.mytasklist,-- Middle widget
+        --layout = wibox.layout.fixed.horizontal,
+        nil,
+        --mpris_widget(),
+        --mpd(),
         { -- Right widget 
             layout = wibox.layout.fixed.horizontal,
             separator,
-            mykeyboardlayout,
+            mpris_widget(),
             separator,
-            wibox.widget.systray(),
+            spacer,
+            volume_widget(),
+            --mykeyboardlayout,
+            --separator,
+            --wibox.widget.systray(),
             separator,
             mytextclock,
             separator,
             power_menu(),
+            spacer,
         },
     }
 end)
@@ -364,8 +378,8 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.util.spawn("rofi -show run") end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey },            "r",     function () awful.util.spawn(dmenu_ex) end,
+              {description = "run dmenu", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -516,8 +530,11 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+          "Media viewer",
         },
         class = {
+          "TelegramDesktop",
+          "Media viewer",
           "Arandr",
           "Blueman-manager",
           "Gpick",
